@@ -4,6 +4,8 @@ export default function Home({ characters }) {
 
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('ascending');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const filteredCharacters = useMemo(() => {
     return characters.filter((char) =>
@@ -22,6 +24,17 @@ export default function Home({ characters }) {
     setSortOrder((prevSortOrder) => (prevSortOrder === 'ascending' ? 'descending' : 'ascending'));
   };
 
+  const totalPages = Math.ceil(sortedCharacters.length / itemsPerPage);
+
+  const paginatedCharacters = useMemo(() => {
+    const pageStartIndex = (currentPage - 1) * itemsPerPage;
+    return sortedCharacters.slice(pageStartIndex, pageStartIndex + itemsPerPage);
+  }, [sortedCharacters, currentPage]);
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+  };
+
   return (
     <>
       <h1>Personagens de Star Wars</h1>
@@ -36,10 +49,25 @@ export default function Home({ characters }) {
           Ordenar {sortOrder === 'ascending' ? 'Z-A' : 'A-Z'}
         </button>
         <ul>
-          {sortedCharacters.map((char) => (
+          {paginatedCharacters.map((char) => (
             <li key={char.name}>{char.name}</li>
           ))}
         </ul>
+        <div>
+          <button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </button>
+          <p> Página {currentPage} de {totalPages} </p>
+          <button
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Próxima
+          </button>
+        </div>
       </div>
     </>
   );
