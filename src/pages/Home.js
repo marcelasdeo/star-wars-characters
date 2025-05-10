@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react';
+import CharacterDetailsModal from '../components/CharacterDetailsModal';
 
 export default function Home({ characters }) {
-
+console.log('characters', characters);
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('ascending');
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCharacter, setSelectedCharacter] = useState(null);
   const itemsPerPage = 10;
 
   const filteredCharacters = useMemo(() => {
@@ -50,7 +52,7 @@ export default function Home({ characters }) {
         </button>
         <ul>
           {paginatedCharacters.map((char) => (
-            <li key={char.name}>{char.name}</li>
+            <li key={char.name} onClick={() => { setSelectedCharacter(char) }}>{char.name}</li>
           ))}
         </ul>
         <div>
@@ -69,6 +71,8 @@ export default function Home({ characters }) {
           </button>
         </div>
       </div>
+
+      <CharacterDetailsModal character={selectedCharacter} onClose={() => { setSelectedCharacter(null) }} />
     </>
   );
 }

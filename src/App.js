@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import { fetchCharacters } from './api/swapi';
+import './styles/style.css'
 
 function App() {
   const [characters, setCharacters] = useState([]);
