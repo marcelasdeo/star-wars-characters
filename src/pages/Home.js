@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
 import CharacterDetailsModal from '../components/CharacterDetailsModal';
 
-export default function Home({ characters }) {
-console.log('characters', characters);
+export default function Home({ characters, films, planets, starships, vehicles, species }) {
+
   const [search, setSearch] = useState('');
   const [sortOrder, setSortOrder] = useState('ascending');
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +72,15 @@ console.log('characters', characters);
         </div>
       </div>
 
-      <CharacterDetailsModal character={selectedCharacter} onClose={() => { setSelectedCharacter(null) }} />
+      <CharacterDetailsModal
+        character={selectedCharacter}
+        onClose={() => { setSelectedCharacter(null) }}
+        films={films}
+        planets={planets}
+        starships={starships}
+        vehicles={vehicles}
+        species={species}
+      />
     </>
   );
 }
