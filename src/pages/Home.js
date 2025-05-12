@@ -1,5 +1,10 @@
 import { useState, useMemo, useEffect } from 'react';
 import CharacterDetailsModal from '../components/CharacterDetailsModal';
+import { BsSortAlphaDown } from "react-icons/bs";
+import { BsSortAlphaUp } from "react-icons/bs";
+import { IoSearch } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 export default function Home({ characters, films, planets, starships, vehicles, species }) {
 
@@ -43,39 +48,49 @@ export default function Home({ characters, films, planets, starships, vehicles, 
   };
 
   return (
-    <>
-      <h1>Personagens de Star Wars</h1>
-      <input
-        type="text"
-        placeholder="Pesquise um personagem"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <div>
-        <button onClick={toggleSortOrder}>
-          Ordenar {sortOrder === 'ascending' ? 'Z-A' : 'A-Z'}
-        </button>
-        <ul>
+    <div id="home">
+      <header>
+        <img src="/assets/imgs/star-wars-logo.png" alt="Logo de Star Wars" />
+        <h1>Personagens</h1>
+      </header>
+      <main>
+        <div id="filtering-container">
+          <button onClick={toggleSortOrder}>
+            {sortOrder === 'ascending' ? <BsSortAlphaDown className="sort-icon" /> : <BsSortAlphaUp className="sort-icon" />}
+          </button>
+          <div id="search-container">
+            <input
+              type="text"
+              placeholder="Pesquise um personagem"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <IoSearch id="search-icon"/>
+          </div>
+        </div>
+        <div id="characters-list">
           {paginatedCharacters.map((char) => (
-            <li key={char.name} onClick={() => { setSelectedCharacter(char) }}>{char.name}</li>
+            <div className="characters-container" key={char.name} onClick={() => { setSelectedCharacter(char) }}>
+              <p>{char.name}</p>
+            </div>
           ))}
-        </ul>
-        <div>
+        </div>
+        <div id="pagination-container">
           <button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 1}
           >
-            Anterior
+            <IoIosArrowBack className="go-to-page-icon" />
           </button>
-          <p> Página {currentPage} de {totalPages} </p>
+          <p id="pagination-summary"> Página {currentPage} de {totalPages} </p>
           <button
             onClick={() => goToPage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
-            Próxima
+            <IoIosArrowForward className="go-to-page-icon" />
           </button>
         </div>
-      </div>
+      </main>
 
       <CharacterDetailsModal
         character={selectedCharacter}
@@ -86,6 +101,6 @@ export default function Home({ characters, films, planets, starships, vehicles, 
         vehicles={vehicles}
         species={species}
       />
-    </>
+    </div>
   );
 }
