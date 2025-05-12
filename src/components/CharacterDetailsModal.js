@@ -1,16 +1,17 @@
 export default function CharacterDetailsModal({ character, onClose, characters, films, planets, starships, vehicles, species }) {
   if (!character) return null;
 
-  const getLabels = (urls, data, key = 'name') => {
+  const getLabels = (urls, data, key = "name") => {
     return urls
       .map(url => data.find(item => item.url === url))
       .filter(Boolean)
       .map(item => item[key]);
   };
 
-  const characterFilms = getLabels(character.films, films, 'title');
-  const characterSpecies = getLabels(character.species, species);
-  const characterHomeworld = getLabels([character.homeworld], planets);
+  const characterBirthYear = character.birth_year === "unknown" ? "Desconhecido" : character.birth_year;
+  const characterFilms = character.species === "unknown" ? "Desconhecido" : getLabels(character.films, films, "title");
+  const characterSpecies = character.species === "unknown" ? "Desconhecido" : getLabels(character.species, species).includes("Human") ? "Humano" : getLabels(character.species, species);
+  const characterHomeworld = character.species === "unknown" ? "Desconhecido" : getLabels([character.homeworld], planets);
   const characterStarships = getLabels(character.starships, starships);
   const characterVehicles = getLabels(character.vehicles, vehicles);
 
@@ -18,16 +19,16 @@ export default function CharacterDetailsModal({ character, onClose, characters, 
   const starshipCount = character.starships.length;
   const vehicleCount = character.vehicles.length;
 
-  const filmLabel = filmCount === 1 ? 'filme' : 'filmes';
-  const starshipLabel = starshipCount === 1 ? 'espaçonave' : starshipCount > 1 ? 'espaçonaves' : null;
-  const vehicleLabel = vehicleCount === 1 ? 'veículo' : vehicleCount > 1 ? 'veículos' : null;
+  const filmLabel = filmCount === 1 ? "filme" : "filmes";
+  const starshipLabel = starshipCount === 1 ? "espaçonave" : starshipCount > 1 ? "espaçonaves" : null;
+  const vehicleLabel = vehicleCount === 1 ? "veículo" : vehicleCount > 1 ? "veículos" : null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h1>{character.name.toUpperCase()}</h1>
         <div className="modal-section">
-          <p><strong>Ano de nascimento:</strong> {character.birth_year}</p>
+          <p><strong>Ano de nascimento:</strong> {characterBirthYear}</p>
           <p><strong>Espécie:</strong> {characterSpecies}</p>
           <p><strong>Planeta natal:</strong> {characterHomeworld}</p>
         </div>
