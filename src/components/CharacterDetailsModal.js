@@ -26,18 +26,22 @@ export default function CharacterDetailsModal({ character, onClose, characters, 
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h1>{character.name}</h1>
-        <p>Ano de nascimento: {character.birth_year}</p>
-        <p>Espécie: {characterSpecies}</p>
-        <p>Planeta natal: {characterHomeworld}</p>
-        <p>{character.name} apareceu em {filmCount} {filmLabel}:</p>
-        <ul>
-          {characterFilms.map((film) => (
-            <li key={film}>{film}</li>
-          ))}
-        </ul>
+        <div className="modal-section">
+          <p><strong>Ano de nascimento:</strong> {character.birth_year}</p>
+          <p><strong>Espécie:</strong> {characterSpecies}</p>
+          <p><strong>Planeta natal:</strong> {characterHomeworld}</p>
+        </div>
+        <div className="modal-section">
+          <p><strong>{character.name}</strong> apareceu em {filmCount} {filmLabel}:</p>
+          <ul>
+            {characterFilms.map((film) => (
+              <li key={film}>{film}</li>
+            ))}
+          </ul>
+        </div>
         {starshipLabel && (
-          <div>
-            <p>Possui {starshipCount} {starshipLabel}:</p>
+          <div className="modal-section">
+            <p><strong>Possui {starshipCount} {starshipLabel}:</strong></p>
             <ul>
               {characterStarships.map((ship) => (
                 <li key={ship}>{ship}</li>
@@ -46,8 +50,8 @@ export default function CharacterDetailsModal({ character, onClose, characters, 
           </div>
         )}
         {vehicleLabel && (
-          <div>
-            <p>Possui {vehicleCount} {vehicleLabel}:</p>
+          <div className="modal-section">
+            <p><strong>Possui {vehicleCount} {vehicleLabel}:</strong></p>
             <ul>
               {characterVehicles.map((vehicle) => (
                 <li key={vehicle}>{vehicle}</li>
