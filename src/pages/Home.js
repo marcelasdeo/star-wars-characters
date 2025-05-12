@@ -3,8 +3,10 @@ import CharacterDetailsModal from '../components/CharacterDetailsModal';
 import { BsSortAlphaDown } from "react-icons/bs";
 import { BsSortAlphaUp } from "react-icons/bs";
 import { IoSearch } from "react-icons/io5";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 export default function Home({ characters, films, planets, starships, vehicles, species }) {
 
@@ -65,7 +67,7 @@ export default function Home({ characters, films, planets, starships, vehicles, 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <IoSearch id="search-icon"/>
+            <IoSearch id="search-icon" />
           </div>
         </div>
         <div id="characters-list">
@@ -76,19 +78,35 @@ export default function Home({ characters, films, planets, starships, vehicles, 
           ))}
         </div>
         <div id="pagination-container">
-          <button
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            <IoIosArrowBack className="go-to-page-icon" />
-          </button>
+          <div>
+            <button
+              onClick={() => goToPage(1)}
+              disabled={currentPage === 1}
+            >
+              <MdKeyboardDoubleArrowLeft className="go-to-page-icon" />
+            </button>
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              <MdKeyboardArrowLeft className="go-to-page-icon" />
+            </button>
+          </div>
           <p id="pagination-summary"> Página {currentPage} de {totalPages} </p>
-          <button
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            <IoIosArrowForward className="go-to-page-icon" />
-          </button>
+          <div>
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              <MdKeyboardArrowRight className="go-to-page-icon" />
+            </button>
+            <button
+              onClick={() => goToPage(totalPages)}
+              disabled={currentPage === totalPages}
+            >
+              <MdKeyboardDoubleArrowRight className="go-to-page-icon" />
+            </button>
+          </div>
         </div>
       </main>
 
