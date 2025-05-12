@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import CharacterDetailsModal from '../components/CharacterDetailsModal';
 
 export default function Home({ characters, films, planets, starships, vehicles, species }) {
@@ -21,6 +21,11 @@ export default function Home({ characters, films, planets, starships, vehicles, 
       else return secondCharacter.name.localeCompare(firstCharacter.name);
     });
   }, [filteredCharacters, sortOrder]);
+
+  useEffect(() => {
+    const totalSearchPages = Math.ceil(sortedCharacters.length / itemsPerPage);
+    if (currentPage > totalSearchPages) setCurrentPage(totalSearchPages || 1);
+  }, [sortedCharacters, currentPage]);
 
   const toggleSortOrder = () => {
     setSortOrder((prevSortOrder) => (prevSortOrder === 'ascending' ? 'descending' : 'ascending'));
