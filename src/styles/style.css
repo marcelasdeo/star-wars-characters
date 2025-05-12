@@ -26,7 +26,7 @@ header {
 }
 
 header img {
-  width: 20%;
+  width: 15%;
   margin-left: 50px;
   user-select: none;
   pointer-events: none;
@@ -99,11 +99,45 @@ main {
 
 .characters-container {
   width: calc(20% - 50px);
-  background-color: grey;
+  height: 120px;
+  background-color: rgb(50, 50, 50, 0.3);
+  backdrop-filter: blur(4px);
   color: white;
   text-align: center;
   padding: 10px;
   border-radius: 10px;
+}
+
+.characters-container:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(255, 233, 25, 0.4);
+}
+
+.characters-container.selected {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(255, 233, 25, 0.4);
+}
+
+.details-icon {
+  display: flex;
+  justify-self: flex-end;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: #FFE919;
+}
+
+.details-icon:hover {
+  width: 25px;
+  height: 25px;
+  transition: all 0.3s ease;
+}
+
+.details-icon.selected {
+  width: 25px;
+  height: 25px;
+  transition: all 0.3s ease;
 }
 
 #pagination-container {

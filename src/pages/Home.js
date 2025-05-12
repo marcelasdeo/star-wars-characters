@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import CharacterDetailsModal from '../components/CharacterDetailsModal';
+import { CiCircleMore } from "react-icons/ci";
 import { BsSortAlphaDown } from "react-icons/bs";
 import { BsSortAlphaUp } from "react-icons/bs";
 import { IoSearch } from "react-icons/io5";
@@ -72,7 +73,8 @@ export default function Home({ characters, films, planets, starships, vehicles, 
         </div>
         <div id="characters-list">
           {paginatedCharacters.map((char) => (
-            <div className="characters-container" key={char.name} onClick={() => { setSelectedCharacter(char) }}>
+            <div className={`characters-container ${selectedCharacter?.name === char.name ? 'selected' : ''}`} key={char.name}>
+              <CiCircleMore className={`details-icon ${selectedCharacter?.name === char.name ? 'selected' : ''}`} onClick={() => { setSelectedCharacter(char) }} />
               <p>{char.name}</p>
             </div>
           ))}

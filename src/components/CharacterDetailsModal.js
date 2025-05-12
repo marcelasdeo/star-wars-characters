@@ -25,7 +25,7 @@ export default function CharacterDetailsModal({ character, onClose, characters, 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h1>{character.name}</h1>
+        <h1>{character.name.toUpperCase()}</h1>
         <div className="modal-section">
           <p><strong>Ano de nascimento:</strong> {character.birth_year}</p>
           <p><strong>Espécie:</strong> {characterSpecies}</p>
