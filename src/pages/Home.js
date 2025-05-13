@@ -75,12 +75,16 @@ export default function Home({ characters, films, planets, starships, vehicles, 
           </div>
         </div>
         <div id="characters-list">
-          {paginatedCharacters.map((char) => (
-            <div className={`characters-container ${selectedCharacter?.name === char.name ? 'selected' : ''}`} key={char.name}>
-              <CiCircleMore className={`details-icon ${selectedCharacter?.name === char.name ? 'selected' : ''}`} onClick={() => { setSelectedCharacter(char) }} />
-              <p>{char.name}</p>
-            </div>
-          ))}
+          {paginatedCharacters.length > 0 ? (
+            paginatedCharacters.map((char) => (
+              <div className={`characters-container ${selectedCharacter?.name === char.name ? 'selected' : ''}`} key={char.name}>
+                <CiCircleMore className={`details-icon ${selectedCharacter?.name === char.name ? 'selected' : ''}`} onClick={() => { setSelectedCharacter(char) }} />
+                <p>{char.name}</p>
+              </div>
+            ))
+          ) : (
+            <p id="no-result-text" >Nenhum personagem encontrado.</p>
+          )}
         </div>
         <div id="pagination-container">
           <div>
@@ -97,7 +101,9 @@ export default function Home({ characters, films, planets, starships, vehicles, 
               <MdKeyboardArrowLeft className="go-to-page-icon" />
             </button>
           </div>
-          <p id="pagination-summary"> Página {currentPage} de {totalPages} </p>
+          {totalPages > 0 && (
+            <p id="pagination-summary"> Página {currentPage} de {totalPages} </p>
+          )}
           <div>
             <button
               onClick={() => goToPage(currentPage + 1)}
