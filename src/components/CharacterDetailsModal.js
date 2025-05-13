@@ -9,9 +9,9 @@ export default function CharacterDetailsModal({ character, onClose, characters, 
   };
 
   const characterBirthYear = character.birth_year === "unknown" ? "Desconhecido" : character.birth_year;
-  const characterFilms = character.species === "unknown" ? "Desconhecido" : getLabels(character.films, films, "title");
+  const characterFilms = getLabels(character.films, films, "title");
   const characterSpecies = character.species === "unknown" ? "Desconhecido" : getLabels(character.species, species).includes("Human") ? "Humano" : getLabels(character.species, species);
-  const characterHomeworld = character.species === "unknown" ? "Desconhecido" : getLabels([character.homeworld], planets);
+  const characterHomeworld = getLabels([character.homeworld], planets)[0] === "unknown" ? "Desconhecido" : getLabels([character.homeworld], planets);
   const characterStarships = getLabels(character.starships, starships);
   const characterVehicles = getLabels(character.vehicles, vehicles);
 
