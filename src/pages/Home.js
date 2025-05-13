@@ -120,6 +120,12 @@ export default function Home({ characters, films, planets, starships, vehicles, 
           </div>
         </div>
       </main>
+      <footer>
+        <div>
+          <p>Desenvolvido por <a href="https://github.com/marcelasdeo" target="_blank" rel="noopener noreferrer">Marcela Souza de Oliveira</a></p>
+          <p>API: <a href="https://swapi.py4e.com/" target="_blank" rel="noopener noreferrer">SWAPI</a></p>
+        </div>
+      </footer>
 
       <CharacterDetailsModal
         character={selectedCharacter}

@@ -26,7 +26,10 @@ body {
 }
 
 #home {
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   background: url('../assets/imgs/stars-bg.png') repeat;
   animation: moveStarsBg 200s linear infinite;
 }
@@ -57,8 +60,9 @@ header h1 {
 
 main {
   background-color: rgba(0, 0, 0, 0.9);
-  width: 80%;
-  height: 40vh;
+  width: 60%;
+  min-height: 200px;
+  max-height: 305px;
   margin: 30px;
   padding: 30px;
   border-radius: 50px;
@@ -126,7 +130,7 @@ main {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 30px;
-  min-height: 220px;
+  min-height: 200px;
 }
 
 .characters-container {
@@ -286,7 +290,35 @@ main {
   color: black;
 }
 
+footer {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  background-color: #111;
+  padding: 20px;
+  border-top: 1px solid #FFE919;
+}
+
+footer p {
+  display: flex;
+  justify-content: flex-end;
+}
+
+a {
+  color: #FFE919;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
 @media screen and (max-width: 815px) {
+  body {
+    overflow: auto;
+  }
+
+  #home {
+    display: block;
+  }
+
   header {
     justify-content: center;
   }
@@ -298,6 +330,11 @@ main {
 
   header h1 {
     font-size: 1.3rem;
+  }
+
+  main {
+    width: 80%;
+    min-height: 78vh;
   }
 
   #filtering-container {
@@ -315,5 +352,9 @@ main {
 
   .modal-content {
     width: 50%;
+  }
+
+  footer {
+    align-self: end;
   }
 }
