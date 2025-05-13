@@ -58,17 +58,20 @@ export default function Home({ characters, films, planets, starships, vehicles, 
       </header>
       <main>
         <div id="filtering-container">
-          <button onClick={toggleSortOrder}>
-            {sortOrder === 'ascending' ? <BsSortAlphaDown className="sort-icon" /> : <BsSortAlphaUp className="sort-icon" />}
-          </button>
-          <div id="search-container">
-            <input
-              type="text"
-              placeholder="Pesquise um personagem"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <IoSearch id="search-icon" />
+          <p>Exibindo {paginatedCharacters.length} de {sortedCharacters.length} personagens</p>
+          <div>
+            <button onClick={toggleSortOrder}>
+              {sortOrder === 'ascending' ? <BsSortAlphaDown className="sort-icon" /> : <BsSortAlphaUp className="sort-icon" />}
+            </button>
+            <div id="search-container">
+              <input
+                type="text"
+                placeholder="Pesquise um personagem"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <IoSearch id="search-icon" />
+            </div>
           </div>
         </div>
         <div id="characters-list">
