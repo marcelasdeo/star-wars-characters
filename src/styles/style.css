@@ -164,6 +164,23 @@ main {
   align-self: center;
 }
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#loading-icon {
+  color: white;
+  width: 35px;
+  height: 35px;
+  align-self: center;
+  animation: spin 4s linear infinite;
+}
+
 .details-icon {
   display: flex;
   justify-self: flex-end;

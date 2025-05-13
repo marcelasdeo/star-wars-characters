@@ -8,6 +8,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { FiLoader } from "react-icons/fi";
 
 export default function Home({ characters, films, planets, starships, vehicles, species }) {
 
@@ -15,7 +16,13 @@ export default function Home({ characters, films, planets, starships, vehicles, 
   const [sortOrder, setSortOrder] = useState('ascending');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [loading, setLoading] = useState(true);
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const filteredCharacters = useMemo(() => {
     return characters.filter((char) =>
@@ -75,15 +82,23 @@ export default function Home({ characters, films, planets, starships, vehicles, 
           </div>
         </div>
         <div id="characters-list">
-          {paginatedCharacters.length > 0 ? (
+          {loading ? (
+            <FiLoader id="loading-icon" />
+          ) : paginatedCharacters.length > 0 ? (
             paginatedCharacters.map((char) => (
-              <div className={`characters-container ${selectedCharacter?.name === char.name ? 'selected' : ''}`} key={char.name}>
-                <CiCircleMore className={`details-icon ${selectedCharacter?.name === char.name ? 'selected' : ''}`} onClick={() => { setSelectedCharacter(char) }} />
+              <div
+                className={`characters-container ${selectedCharacter?.name === char.name ? 'selected' : ''}`}
+                key={char.name}
+              >
+                <CiCircleMore
+                  className={`details-icon ${selectedCharacter?.name === char.name ? 'selected' : ''}`}
+                  onClick={() => { setSelectedCharacter(char) }}
+                />
                 <p>{char.name}</p>
               </div>
             ))
           ) : (
-            <p id="no-result-text" >Nenhum personagem encontrado.</p>
+            <p id="no-result-text">Nenhum personagem encontrado.</p>
           )}
         </div>
         <div id="pagination-container">
